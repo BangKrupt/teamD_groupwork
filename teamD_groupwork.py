@@ -1,6 +1,6 @@
 n = input("2~6 사이 정수 입력: ")
 
-array = [[3, 8, 9], [4, 12, 7], [4, 8, 5]]
+array = [[1, 8, 7], [4, 3, 9], [5, 2, 6]]
 
 def sub_min_row(size):
     min_row = [min(row) for row in array]
