@@ -13,13 +13,21 @@ def CreateRandomData(n):
     global array
     array = [list(df.iloc[j]) for j in range(n)]
 
-# Part 2(Simple Solution - 각 기계별로 최소비용의 작업 구하기)
+# Part 2(Simple Solution - 기계 1부터 기계 n까지 순차적으로 최소비용의 작업 구하기)
 def find_smallest():
-    print('기계별 최소비용의 작업은 다음과 같습니다')
+    print('Simple solution is :')
+    indexlist = []
     for i in range(n):
-        machine = '기계'+str(i+1)
-        cost = min(array[i])
-        work = '작업'+str(array[i].index(cost)+1)
+        machine = '기계'+str(i + 1)
+        while True:
+            cost = min(array[i])
+            costindex = array[i].index(cost)
+            if costindex not in indexlist:
+                work = '작업' + str(array[i].index(cost) + 1)
+                indexlist.append(costindex)
+                break
+            else:
+                array[i][costindex] = max(array[i]) + 1
         print('{} : {} (Cost:{})'.format(machine, work, cost))
 
 # Part 2-1(Optimal Solution) - In progress
