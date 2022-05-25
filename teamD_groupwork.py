@@ -46,3 +46,5 @@ def sub_min_col(size):
 if __name__ == '__main__':
     CreateRandomData(n)
     find_smallest()
+    #sub_min_row(n)
+    #sub_min_col(n)
