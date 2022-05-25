@@ -13,7 +13,7 @@ def CreateRandomData(n):
     global array
     array = [list(df.iloc[j]) for j in range(n)]
 
-# Part 2(Simple Solution - 기계 1부터 기계 n까지 순차적으로 최소비용의 작업 구하기)
+# Part 2(Simple Solution) : 기계 1부터 기계 n까지 순차적으로 최소비용의 작업 구하기
 def find_smallest():
     print('Simple solution is :')
     indexlist = []
