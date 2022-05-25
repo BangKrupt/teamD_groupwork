@@ -9,11 +9,20 @@ def CreateRandomData(n):
         data["작업{}".format(i)] = [random.randrange(1, 101) for i in range(1, n + 1)]
     df = pandas.DataFrame(data)
     df.index = ['기계{}'.format(i) for i in range(1, n + 1)]
-    print(df)
+    print(df, '\n')
     global array
     array = [list(df.iloc[j]) for j in range(n)]
 
-# Part 2
+# Part 2(Simple Solution - 각 기계별로 최소비용의 작업 구하기)
+def find_smallest():
+    print('기계별 최소비용의 작업은 다음과 같습니다')
+    for i in range(n):
+        machine = '기계'+str(i+1)
+        cost = min(array[i])
+        work = '작업'+str(array[i].index(cost)+1)
+        print('{} : {} (Cost:{})'.format(machine, work, cost))
+
+# Part 2-1(Optimal Solution) - In progress
 def sub_min_row(size):
     min_row = [min(row) for row in array]
     for i in range(size):
@@ -28,6 +37,4 @@ def sub_min_col(size):
 
 if __name__ == '__main__':
     CreateRandomData(n)
-    sub_min_row(n)
-    sub_min_col(n)
-    print(array)
+    find_smallest()
