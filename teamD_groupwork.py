@@ -1,4 +1,5 @@
 import random, pandas
+from scipy.optimize import linear_sum_assignment
 
 n = int(input("2~6사이 정수를 입력하세요:"))
 
@@ -30,21 +31,18 @@ def find_smallest():
                 array[i][costindex] = max(array[i]) + 1
         print('{} : {} (Cost:{})'.format(machine, work, cost))
 
-# Part 2-1(Optimal Solution) - In progress
-def sub_min_row(size):
-    min_row = [min(row) for row in array]
-    for i in range(size):
-        for j in range(size):
-            array[i][j] -= min_row[i]
+# Part 2-1(Optimal Solution) - Using scipy package
+def Hungarian(array):
+    row, col = linear_sum_assignment(array)
+    minimized_cost = 0
+    for m in range(0, n) :
+        minimized_cost+= array[m][col[m]]
+    return(minimized_cost)
 
-def sub_min_col(size):
-    min_col = [min(col) for col in zip(*array)]
-    for i in range(size):
-        for j in range(size):
-            array[j][i] -= min_col[i]
 
 if __name__ == '__main__':
     CreateRandomData(n)
     find_smallest()
+    Hungarian(array)
     #sub_min_row(n)
     #sub_min_col(n)
