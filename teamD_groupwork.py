@@ -8,7 +8,8 @@ if not os.path.isdir("output"):
 
 if not os.path.exists("output/result.txt"):
     f = open("output/result.txt",'w',encoding="utf8")
-    f.write(str(datetime.datetime.now()) + "\t" + "로그생성됨.\n" + '\n')
+    f.write(str(datetime.datetime.now()) + "\t" + "로그생성됨." + "\n" +
+            '-------------------------------------------------\n')
     f.close()
 
 def logStamp(s):
@@ -53,8 +54,8 @@ def find_smallest():
         print('{} : {} (Cost:{})'.format(machine, work, cost))
 
         log_str = log_str + '{} : {} (Cost:{})\n'.format(machine, work, cost) # 로그관리
-    logStamp('Simple solution is :\n' + '\n' + log_str + '\n' +
-             '-------------------------------------------------\n')
+    logStamp('Simple solution is :\n' + '\n' + log_str +
+             '-------------------------------------------------')
 
 
 # Part 2-1(Optimal Solution) - In progress
