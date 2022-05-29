@@ -1,23 +1,22 @@
 import random, pandas
 import os, datetime
-
+from scipy.optimize import linear_sum_assignment
 
 # Part 3(로그 관리)
 if not os.path.isdir("output"):
     os.mkdir("output")
 
 if not os.path.exists("output/result.txt"):
-    f = open("output/result.txt",'w',encoding="utf8")
+    f = open("output/result.txt", 'w', encoding="utf8")
     f.write(str(datetime.datetime.now()) + "\t" + "로그생성됨." + "\n" +
             '-------------------------------------------------\n')
     f.close()
 
 def logStamp(s):
-    with open("output/result.txt",'a',encoding="utf8") as f:
+    with open("output/result.txt", 'a', encoding="utf8") as f:
         stamp = str(datetime.datetime.now())
-        log_line = stamp + "\t" + s +"\n"
+        log_line = stamp + "\t" + s + "\n"
         f.write(log_line)
-
 
 # Part 1(데이터 생성): 사용자가 n의 값을 입력하면, n by n matrix 생성하고 1~100 사이 무작위 정수로 구성함.
 def CreateRandomData(n):
@@ -30,7 +29,7 @@ def CreateRandomData(n):
     global array
     array = [list(df.iloc[j]) for j in range(n)]
 
-    logStamp('Data is :\n'+'\n'+'기\작'+df.to_csv()) # 로그관리
+    logStamp('Data is :\n'+'\n'+'기\작'+df.to_csv())  # 로그관리
 
 
 # Part 2(Simple Solution) : 기계 1부터 기계 n까지 순차적으로 최소비용의 작업 구하기
@@ -53,24 +52,18 @@ def find_smallest():
                 array[i][costindex] = max(array[i]) + 1
         print('{} : {} (Cost:{})'.format(machine, work, cost))
 
-        log_str = log_str + '{} : {} (Cost:{})\n'.format(machine, work, cost) # 로그관리
-    logStamp('Simple solution is :\n' + '\n' + log_str +
-             '-------------------------------------------------')
-
+        log_str = log_str + '{} : {} (Cost:{})\n'.format(machine, work, cost)  # 로그관리
+    logStamp('Simple solution is :\n' + '\n' + log_str)
 
 # Part 2-1(Optimal Solution) - In progress
-def sub_min_row(size):
-    min_row = [min(row) for row in array]
-    for i in range(size):
-        for j in range(size):
-            array[i][j] -= min_row[i]
-
-def sub_min_col(size):
-    min_col = [min(col) for col in zip(*array)]
-    for i in range(size):
-        for j in range(size):
-            array[j][i] -= min_col[i]
-
+def Hungarian(array):
+    row, col = linear_sum_assignment(array)
+    minimized_cost = 0
+    for m in range(0, n):
+        minimized_cost += array[m][col[m]]
+    print('\nOptimal solution is : Cost {}'.format(minimized_cost))
+    logStamp('Optimal solution is :\n' + '\n' + 'Cost {}\n'.format(minimized_cost) +
+             '-------------------------------------------------' + '\n')   # 로그관리
 
 if __name__ == '__main__':
     n = int(input("2~6사이 정수를 입력하세요: "))
@@ -83,3 +76,5 @@ if __name__ == '__main__':
     CreateRandomData(n)
     logStamp("솔루션 도출 시작.\n")
     find_smallest()
+    logStamp("최적해 도출 시작.\n")
+    Hungarian(array)
