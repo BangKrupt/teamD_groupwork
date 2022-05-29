@@ -55,7 +55,7 @@ def find_smallest():
         log_str = log_str + '{} : {} (Cost:{})\n'.format(machine, work, cost)  # 로그관리
     logStamp('Simple solution is :\n' + '\n' + log_str)
 
-# Part 2-1(Optimal Solution) - In progress
+# Part 2-1(Optimal Solution) - scipy 라이브러리 활용 최적해 구하기
 def Hungarian(array):
     row, col = linear_sum_assignment(array)
     minimized_cost = 0
