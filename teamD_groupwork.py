@@ -35,14 +35,11 @@ def find_smallest():
 def Hungarian(array):
     row, col = linear_sum_assignment(array)
     minimized_cost = 0
-    for m in range(0, n) :
-        minimized_cost+= array[m][col[m]]
-    return(minimized_cost)
-
+    for m in range(0, n):
+        minimized_cost += array[m][col[m]]
+    print('\nOptimal solution is : Cost {}'.format(minimized_cost))
 
 if __name__ == '__main__':
     CreateRandomData(n)
     find_smallest()
     Hungarian(array)
-    #sub_min_row(n)
-    #sub_min_col(n)
