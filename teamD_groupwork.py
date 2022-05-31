@@ -65,6 +65,25 @@ def Hungarian(array):
     logStamp('Optimal solution is :\n' + '\n' + 'Cost {}\n'.format(minimized_cost) +
              '-------------------------------------------------' + '\n')   # 로그관리
 
+def find_optiimal():
+    start=list(range(1,n+1))
+    def perm(start):
+        length = len(start)
+        if length == 1:
+            return [start]
+        else:
+            result = []
+            for i in start:
+                b = start.copy()
+                b.remove(i)
+                b.sort()
+                for j in perm(b):
+                    j.insert(0, i)
+                    if j not in result:
+                        result.append(j)
+        return result
+    print(perm(start))
+
 if __name__ == '__main__':
     n = int(input("2~6사이 정수를 입력하세요: "))
 
@@ -78,3 +97,4 @@ if __name__ == '__main__':
     find_smallest()
     logStamp("최적해 도출 시작.\n")
     Hungarian(array)
+    find_optiimal()
