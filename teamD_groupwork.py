@@ -82,7 +82,7 @@ def find_optiimal(array):
                     j.insert(0, i)
                     if j not in result:
                         result.append(j)
-        return result
+            return result
     all=permutation(start)
     all_sol=[]
     for i in range(len(all)):
