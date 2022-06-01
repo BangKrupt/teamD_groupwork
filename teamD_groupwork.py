@@ -65,6 +65,7 @@ def Hungarian(array):
     logStamp('Optimal solution is :\n' + '\n' + 'Cost {}\n'.format(minimized_cost) +
              '-------------------------------------------------' + '\n')   # 로그관리
 
+# Part 2-2(Optimal Solution) - 외부 모듈 사용하지 않고 최적해 구하기
 def find_optiimal(array):
     start=list(range(1,n+1))
     def permutation(start):
