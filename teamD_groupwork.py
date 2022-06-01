@@ -65,9 +65,9 @@ def Hungarian(array):
     logStamp('Optimal solution is :\n' + '\n' + 'Cost {}\n'.format(minimized_cost) +
              '-------------------------------------------------' + '\n')   # 로그관리
 
-def find_optiimal():
+def find_optiimal(array):
     start=list(range(1,n+1))
-    def perm(start):
+    def permutation(start):
         length = len(start)
         if length == 1:
             return [start]
@@ -77,12 +77,27 @@ def find_optiimal():
                 b = start.copy()
                 b.remove(i)
                 b.sort()
-                for j in perm(b):
+                for j in permutation(b):
                     j.insert(0, i)
                     if j not in result:
                         result.append(j)
         return result
-    print(perm(start))
+    all=permutation(start)
+    all_sol=[]
+    for i in range(len(all)):
+        a=0
+        for j in range(n):
+            a+=array[j][all[i][j]-1]
+        all_sol.append(a)
+    optimal=min(all_sol)
+    for i in all_sol:
+        if optimal==i:
+            optimal_coordinate=all_sol.index(i)
+
+    print("-----최적해(모듈 사용x)-----")
+    for i in range(n):
+        print("기계{} : 작업{} (Cost:{})".format(i+1,all[optimal_coordinate][i],array[i][all[optimal_coordinate][i]-1]))
+    print("최적해:",optimal)
 
 if __name__ == '__main__':
     n = int(input("2~6사이 정수를 입력하세요: "))
@@ -97,4 +112,4 @@ if __name__ == '__main__':
     find_smallest()
     logStamp("최적해 도출 시작.\n")
     Hungarian(array)
-    find_optiimal()
+    find_optiimal(array)
