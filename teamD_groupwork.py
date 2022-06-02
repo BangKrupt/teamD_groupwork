@@ -62,8 +62,7 @@ def Hungarian(array):
     for m in range(0, n):
         minimized_cost += array[m][col[m]]
     print('\nOptimal solution is : Cost {}'.format(minimized_cost))
-    logStamp('Optimal solution is :\n' + '\n' + 'Cost {}\n'.format(minimized_cost) +
-             '-------------------------------------------------' + '\n')   # 로그관리
+    logStamp('Optimal solution is :\n' + '\n' + 'Cost {}\n'.format(minimized_cost) +'\n')   # 로그관리
 
 # Part 2-2(Optimal Solution) - 외부 모듈 사용하지 않고 최적해 구하기
 # n! 가지의 경우의 수 중 비용이 가장 작은 경우 탐색하는 알고리즘
@@ -100,8 +99,9 @@ def find_optiimal(array):
     for i in range(n):
         print("기계{} : 작업{} (Cost:{})".format(i+1,all[optimal_coordinate][i],array[i][all[optimal_coordinate][i]-1]))
     print("최적비용:",optimal)
-    logStamp("기계{} : 작업{} (Cost:{})".format(i+1,all[optimal_coordinate][i],array[i][all[optimal_coordinate][i]-1])
-             +"최적비용:{}".format(optimal))  # 로그관리
+    for i in range(n):
+        logStamp("기계{} : 작업{} (Cost:{})".format(i+1,all[optimal_coordinate][i],array[i][all[optimal_coordinate][i]-1]))  # 로그관리
+    logStamp("최적비용:{}".format(optimal))
 
 if __name__ == '__main__':
     n = int(input("2~6사이 정수를 입력하세요: "))
