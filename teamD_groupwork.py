@@ -66,6 +66,7 @@ def Hungarian(array):
              '-------------------------------------------------' + '\n')   # 로그관리
 
 # Part 2-2(Optimal Solution) - 외부 모듈 사용하지 않고 최적해 구하기
+# n! 가지의 경우의 수 중 비용이 가장 작은 경우 탐색하는 알고리즘
 def find_optiimal(array):
     start=list(range(1,n+1))
     def permutation(start):
@@ -95,10 +96,12 @@ def find_optiimal(array):
         if optimal==i:
             optimal_coordinate=all_sol.index(i)
 
-    print("-----최적해(모듈 사용x)-----")
+    print("\n-------최적해(모듈 사용x)-------")
     for i in range(n):
         print("기계{} : 작업{} (Cost:{})".format(i+1,all[optimal_coordinate][i],array[i][all[optimal_coordinate][i]-1]))
-    print("최적해:",optimal)
+    print("최적비용:",optimal)
+    logStamp("기계{} : 작업{} (Cost:{})".format(i+1,all[optimal_coordinate][i],array[i][all[optimal_coordinate][i]-1])
+             +"최적비용:{}".format(optimal))  # 로그관리
 
 if __name__ == '__main__':
     n = int(input("2~6사이 정수를 입력하세요: "))
@@ -111,6 +114,7 @@ if __name__ == '__main__':
     CreateRandomData(n)
     logStamp("솔루션 도출 시작.\n")
     find_smallest()
-    logStamp("최적해 도출 시작.\n")
+    logStamp("최적해 도출 시작(scipy모듈 활용).\n")
     Hungarian(array)
+    logStamp("최적해 도출 시작(모듈 활용x).\n")
     find_optiimal(array)
