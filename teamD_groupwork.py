@@ -102,6 +102,8 @@ def find_optiimal(array):
     for i in range(n):
         logStamp("기계{} : 작업{} (Cost:{})".format(i+1,all[optimal_coordinate][i],array[i][all[optimal_coordinate][i]-1]))  # 로그관리
     logStamp("최적비용:{}".format(optimal))
+
+    # 솔루션 csv파일로 출력
     f = open("output/result.csv", 'w', encoding="utf8")
     f.write("기계,작업,비용\n")
     for i in range(n):
