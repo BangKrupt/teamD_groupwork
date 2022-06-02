@@ -6,14 +6,14 @@ from scipy.optimize import linear_sum_assignment
 if not os.path.isdir("output"):
     os.mkdir("output")
 
-if not os.path.exists("output/result.txt"):
-    f = open("output/result.txt", 'w', encoding="utf8")
+if not os.path.exists("output/log.txt"):
+    f = open("output/log.txt", 'w', encoding="utf8")
     f.write(str(datetime.datetime.now()) + "\t" + "로그생성됨." + "\n" +
             '-------------------------------------------------\n')
     f.close()
 
 def logStamp(s):
-    with open("output/result.txt", 'a', encoding="utf8") as f:
+    with open("output/log.txt", 'a', encoding="utf8") as f:
         stamp = str(datetime.datetime.now())
         log_line = stamp + "\t" + s + "\n"
         f.write(log_line)
@@ -102,6 +102,11 @@ def find_optiimal(array):
     for i in range(n):
         logStamp("기계{} : 작업{} (Cost:{})".format(i+1,all[optimal_coordinate][i],array[i][all[optimal_coordinate][i]-1]))  # 로그관리
     logStamp("최적비용:{}".format(optimal))
+    f = open("output/result.csv", 'w', encoding="utf8")
+    f.write("기계,작업,비용\n")
+    for i in range(n):
+        f.write("{},{},{}\n".format(i+1,all[optimal_coordinate][i],array[i][all[optimal_coordinate][i]-1]))
+    f.close()
 
 if __name__ == '__main__':
     n = int(input("2~6사이 정수를 입력하세요: "))
